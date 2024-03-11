@@ -23,6 +23,7 @@ db.once("open", function() {
 
   const User = mongoose.model("empresas", userSchema);
   const base = mongoose.model("basecitas", baseSchema);
+  const clase = mongoose.model("ejercicios", baseSchema);
 
   const app = express();
   app.use(express.json());
@@ -107,7 +108,20 @@ db.once("open", function() {
 
   app.listen(3000, function() {
     console.log("Server arriba");
-    console.log("Server arriba");
 
   });
+
+
+  // ejercicios de clase enviados al mail 
+// Obtener todos los usuarios que sean mayores de 18 años.
+
+app.get("/api/users/difrente20", async (req, res) => {
+  const users = await clase.find({ edad: { $ne: 20 } });
+  res.json(users);
+});
+
+
+
+
+
 });
